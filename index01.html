@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alex G's Alarm Clock</title>
+<style type="text/css">
+
+	@font-face {
+ 		font-family: 'ElectroShackle';
+  		src: url('fonts/ElectroShackle.otf');
+ }
+
+ 	@font-face {
+ 		font-family: 'GtekTechnology';
+ 		src: url('fonts/GtekTechnology.ttf');
+ 	}
+
+ 	@font-face {
+ 		font-family: 'DigitalTech';
+ 		src: url('fonts/DigitalTech.otf');
+ 	}
+
+ 	@font-face {
+ 		font-family: 'SpacE';
+ 		src: url('fonts/SpacE.ttf');
+ 	}
+
+ 	@font-face {
+ 		font-family: 'VerminVibesBlack';
+ 		src: url('fonts/VerminVibesBlack.otf');
+ 	}
+
+
+ 	@font-face {
+ 		font-family: 'OrbitronBold';
+ 		src: url('fonts/OrbitronBold.ttf');
+ 	}
+
+
+	body {
+		margin: 0 auto;
+		background: url(images/background03.jpg) no-repeat center;
+	}
+
+	.clock-div {
+		position: relative;
+		width: 400px;
+		height: 300px;
+		margin: 0 auto;
+	}
+
+	#date-display {
+		left: 35px;
+		position: relative;
+		width: 330px;
+		height: 40px;
+		background-color: rgba(0,0,0,.6);
+		text-align: center;
+		color: beige;
+		font-size: 30px;
+		font-family: DigitalTech;
+		border-radius: 20px 20px 0 0;
+	}
+
+	.clock-img-div {
+		background: url(images/clockdesign01.jpg);
+		background-size: cover;
+		position: absolute;
+		left: 35px; top: 40px;
+		width: 330px;
+		height: 180px;
+		box-shadow: 20px 20px 20px;
+	}
+
+	.clock-img {
+		position: relative;
+		width: 100%;
+
+	}
+
+	.display-div {
+		position: absolute;
+		background: black;
+		left: 13px; top: 63px;
+		width: 303px;
+		height: 45px;
+		color: green;
+		font-size: 40px;
+		font-family: OrbitronBold;
+		text-align: center;
+		padding-top: 10px;
+		text-shadow: 0px 3px 10px;
+	}
+
+	#message-screen {
+		border-radius: 0 0 20px 20px;
+		position: absolute;
+		top: 220px; left: 35px;
+		width: 330px;
+		height: 40px;
+		background-color: rgba(0,0,0,.6); 
+		color: pink;
+		font-size: 20px;
+		font-family: OrbitronBold;
+		text-align: center;
+		padding-top: 20px;
+	}
+
+	.table-wrapper {
+		margin: 0 auto;
+		width: 400px;
+	}
+
+	.table-div-01 {
+		margin: 0 auto;
+		display: flex;
+		justify-content: center;
+	}
+
+	table {
+		display: block;
+	}
+
+	th {
+		border-radius: 5px 5px 0 0;
+		background: #000000; /* fallback for old browsers */
+		background: -webkit-linear-gradient(to left, #000000 , #434343); /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to left, #000000 , #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
+		color: beige;
+		text-align: center;
+		font-family: OrbitronBold;
+	}
+
+	tr {
+		background-color: beige;
+	}
+
+	td input {
+		cursor: pointer;
+		color: beige;
+		width: 30px;
+		border-radius: 5px;
+		background: #000000; /* fallback for old browsers */
+		background: -webkit-linear-gradient(to left, #000000 , #434343); /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to left, #000000 , #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
+	}
+
+	td input:hover {
+		color: green;
+		background: #C33764; 
+		background: -webkit-linear-gradient(to left, #C33764 , #1D2671); 
+		background: linear-gradient(to left, #C33764 , #1D2671);
+	}
+
+	.alarm-display-div {
+		margin: 0 auto;
+		position: relative;
+		width: 140px;
+		height: 50px;
+		background-color: rgba(0,0,0,.6);
+	}
+
+	#alarm-hour-set {
+		position: absolute;
+		background-color: rgba(0,0,0,.6);
+		width: 65px;
+		height: 40px;
+		font-size: 35px;
+		font-family: OrbitronBold;
+		color: #6d0a0a;
+		text-align: center;
+		padding-top: 10px;
+		text-shadow: 0 3px 5px;
+	}
+
+	#alarm-minute-set {
+		position: absolute;
+		background-color: rgba(0,0,0,.6);
+		width: 65px;
+		height: 40px;
+		font-size: 35px;
+		font-family: OrbitronBold;
+		text-align: center;
+		color: #6d0a0a;
+		left: 75px;
+		padding-top: 10px;
+		text-shadow: 0 3px 5px;
+	}
+
+	.alarm-colon {
+		position: absolute;
+		font-size: 40px;
+		color: beige;
+		top: 0; left: 65px;
+		font-family: impact;	
+	}
+
+	.button-wrap {
+		display: flex;
+		justify-content: center;
+		width: 240px;
+		margin: 0 auto;
+	}
+
+	#setAlarm-btn {
+		border-radius: 10%;
+		cursor: pointer;
+		display: inline-block;
+		margin: 20px 15px;
+		padding: 10px 0;
+		width: 60px;
+		height: 50px;
+		background-color: #006d03;
+		color: white;
+		font-family: OrbitronBold;
+	}
+
+	#turnoffAlarm-btn {
+		border-radius: 10%;
+		cursor: pointer;
+		display: inline-block;
+		margin: 20px 15px;
+		padding: 10px 0;
+		width: 60px;
+		height: 50px;
+		background-color: #6d0a0a;
+		color: white;
+		font-family: OrbitronBold;
+}
+
+	#setAlarm-btn:hover, #turnoffAlarm-btn:hover {
+		background-color: black;
+		color: beige;
+	}
+
+</style>
+</head>
+<body>
+
+<div class="alarm-wrapper">
+	<div class="clock-div">
+	<div id="date-display"></div>
+	<div class="clock-img-div">
+		<div class="display-div" id="display"></div>
+	</div>
+	<div id="message-screen">ALARM IS OFF</div>
+</div>
+
+
+<div class="table-wrapper">
+	<div class="table-div-01">
+	<table>
+		<tr>
+			<th colspan="6">Hour</th>
+		</tr>
+		<tr>
+			<td><input type="button" value="00" onclick="document.getElementById('alarm-hour-set').innerHTML = '00'"></td>
+			<td><input type="button" value="01" onclick="document.getElementById('alarm-hour-set').innerHTML = '01'"></td>
+			<td><input type="button" value="02" onclick="document.getElementById('alarm-hour-set').innerHTML = '02'"></td>
+			<td><input type="button" value="03" onclick="document.getElementById('alarm-hour-set').innerHTML = '03'"></td>
+			<td><input type="button" value="04" onclick="document.getElementById('alarm-hour-set').innerHTML = '04'"></td>
+			<td><input type="button" value="05" onclick="document.getElementById('alarm-hour-set').innerHTML = '05'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="06" onclick="document.getElementById('alarm-hour-set').innerHTML = '06'"></td>
+			<td><input type="button" value="07" onclick="document.getElementById('alarm-hour-set').innerHTML = '07'"></td>
+			<td><input type="button" value="08" onclick="document.getElementById('alarm-hour-set').innerHTML = '08'"></td>
+			<td><input type="button" value="09" onclick="document.getElementById('alarm-hour-set').innerHTML = '09'"></td>
+			<td><input type="button" value="10" onclick="document.getElementById('alarm-hour-set').innerHTML = '10'"></td>
+			<td><input type="button" value="11" onclick="document.getElementById('alarm-hour-set').innerHTML = '11'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="12" onclick="document.getElementById('alarm-hour-set').innerHTML = '12'"></td>
+			<td><input type="button" value="13" onclick="document.getElementById('alarm-hour-set').innerHTML = '13'"></td>
+			<td><input type="button" value="14" onclick="document.getElementById('alarm-hour-set').innerHTML = '14'"></td>
+			<td><input type="button" value="15" onclick="document.getElementById('alarm-hour-set').innerHTML = '15'"></td>
+			<td><input type="button" value="16" onclick="document.getElementById('alarm-hour-set').innerHTML = '16'"></td>
+			<td><input type="button" value="17" onclick="document.getElementById('alarm-hour-set').innerHTML = '17'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="18" onclick="document.getElementById('alarm-hour-set').innerHTML = '18'"></td>
+			<td><input type="button" value="19" onclick="document.getElementById('alarm-hour-set').innerHTML = '19'"></td>
+			<td><input type="button" value="20" onclick="document.getElementById('alarm-hour-set').innerHTML = '20'"></td>
+			<td><input type="button" value="21" onclick="document.getElementById('alarm-hour-set').innerHTML = '21'"></td>
+			<td><input type="button" value="22" onclick="document.getElementById('alarm-hour-set').innerHTML = '22'"></td>
+			<td><input type="button" value="23" onclick="document.getElementById('alarm-hour-set').innerHTML = '23'"></td>
+		</tr>
+	</table>
+</div>
+<div class="alarm-display-div">
+	<div class="al-set-display" id="alarm-hour-set"></div>
+	<div class="al-set-display" id="alarm-minute-set"></div>
+	<div class="alarm-colon">:</div>
+</div>
+<div class="table-div-01">
+	<table>
+		<tr>
+			<th colspan="10">Minute</th>
+		</tr>
+		<tr>
+			<td><input type="button" value="00" onclick="document.getElementById('alarm-minute-set').innerHTML = '00'"></td>
+			<td><input type="button" value="01" onclick="document.getElementById('alarm-minute-set').innerHTML = '01'"></td>
+			<td><input type="button" value="02" onclick="document.getElementById('alarm-minute-set').innerHTML = '02'"></td>
+			<td><input type="button" value="03" onclick="document.getElementById('alarm-minute-set').innerHTML = '03'"></td>
+			<td><input type="button" value="04" onclick="document.getElementById('alarm-minute-set').innerHTML = '04'"></td>
+			<td><input type="button" value="05" onclick="document.getElementById('alarm-minute-set').innerHTML = '05'"></td>
+			<td><input type="button" value="06" onclick="document.getElementById('alarm-minute-set').innerHTML = '06'"></td>
+			<td><input type="button" value="07" onclick="document.getElementById('alarm-minute-set').innerHTML = '07'"></td>
+			<td><input type="button" value="08" onclick="document.getElementById('alarm-minute-set').innerHTML = '08'"></td>
+			<td><input type="button" value="09" onclick="document.getElementById('alarm-minute-set').innerHTML = '09'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="10" onclick="document.getElementById('alarm-minute-set').innerHTML = '10'"></td>
+			<td><input type="button" value="11" onclick="document.getElementById('alarm-minute-set').innerHTML = '11'"></td>
+			<td><input type="button" value="12" onclick="document.getElementById('alarm-minute-set').innerHTML = '12'"></td>
+			<td><input type="button" value="13" onclick="document.getElementById('alarm-minute-set').innerHTML = '13'"></td>
+			<td><input type="button" value="14" onclick="document.getElementById('alarm-minute-set').innerHTML = '14'"></td>
+			<td><input type="button" value="15" onclick="document.getElementById('alarm-minute-set').innerHTML = '15'"></td>
+			<td><input type="button" value="16" onclick="document.getElementById('alarm-minute-set').innerHTML = '16'"></td>
+			<td><input type="button" value="17" onclick="document.getElementById('alarm-minute-set').innerHTML = '17'"></td>
+			<td><input type="button" value="18" onclick="document.getElementById('alarm-minute-set').innerHTML = '18'"></td>
+			<td><input type="button" value="19" onclick="document.getElementById('alarm-minute-set').innerHTML = '19'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="20" onclick="document.getElementById('alarm-minute-set').innerHTML = '20'"></td>
+			<td><input type="button" value="21" onclick="document.getElementById('alarm-minute-set').innerHTML = '21'"></td>
+			<td><input type="button" value="22" onclick="document.getElementById('alarm-minute-set').innerHTML = '22'"></td>
+			<td><input type="button" value="23" onclick="document.getElementById('alarm-minute-set').innerHTML = '23'"></td>
+			<td><input type="button" value="24" onclick="document.getElementById('alarm-minute-set').innerHTML = '24'"></td>
+			<td><input type="button" value="25" onclick="document.getElementById('alarm-minute-set').innerHTML = '25'"></td>
+			<td><input type="button" value="26" onclick="document.getElementById('alarm-minute-set').innerHTML = '26'"></td>
+			<td><input type="button" value="27" onclick="document.getElementById('alarm-minute-set').innerHTML = '27'"></td>
+			<td><input type="button" value="28" onclick="document.getElementById('alarm-minute-set').innerHTML = '28'"></td>
+			<td><input type="button" value="29" onclick="document.getElementById('alarm-minute-set').innerHTML = '29'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="30" onclick="document.getElementById('alarm-minute-set').innerHTML = '30'"></td>
+			<td><input type="button" value="31" onclick="document.getElementById('alarm-minute-set').innerHTML = '31'"></td>
+			<td><input type="button" value="32" onclick="document.getElementById('alarm-minute-set').innerHTML = '32'"></td>
+			<td><input type="button" value="33" onclick="document.getElementById('alarm-minute-set').innerHTML = '33'"></td>
+			<td><input type="button" value="34" onclick="document.getElementById('alarm-minute-set').innerHTML = '34'"></td>
+			<td><input type="button" value="35" onclick="document.getElementById('alarm-minute-set').innerHTML = '35'"></td>
+			<td><input type="button" value="36" onclick="document.getElementById('alarm-minute-set').innerHTML = '36'"></td>
+			<td><input type="button" value="37" onclick="document.getElementById('alarm-minute-set').innerHTML = '37'"></td>
+			<td><input type="button" value="38" onclick="document.getElementById('alarm-minute-set').innerHTML = '38'"></td>
+			<td><input type="button" value="39" onclick="document.getElementById('alarm-minute-set').innerHTML = '39'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="40" onclick="document.getElementById('alarm-minute-set').innerHTML = '40'"></td>
+			<td><input type="button" value="41" onclick="document.getElementById('alarm-minute-set').innerHTML = '41'"></td>
+			<td><input type="button" value="42" onclick="document.getElementById('alarm-minute-set').innerHTML = '42'"></td>
+			<td><input type="button" value="43" onclick="document.getElementById('alarm-minute-set').innerHTML = '43'"></td>
+			<td><input type="button" value="44" onclick="document.getElementById('alarm-minute-set').innerHTML = '44'"></td>
+			<td><input type="button" value="45" onclick="document.getElementById('alarm-minute-set').innerHTML = '45'"></td>
+			<td><input type="button" value="46" onclick="document.getElementById('alarm-minute-set').innerHTML = '46'"></td>
+			<td><input type="button" value="47" onclick="document.getElementById('alarm-minute-set').innerHTML = '47'"></td>
+			<td><input type="button" value="48" onclick="document.getElementById('alarm-minute-set').innerHTML = '48'"></td>
+			<td><input type="button" value="49" onclick="document.getElementById('alarm-minute-set').innerHTML = '49'"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="50" onclick="document.getElementById('alarm-minute-set').innerHTML = '50'"></td>
+			<td><input type="button" value="51" onclick="document.getElementById('alarm-minute-set').innerHTML = '51'"></td>
+			<td><input type="button" value="52" onclick="document.getElementById('alarm-minute-set').innerHTML = '52'"></td>
+			<td><input type="button" value="53" onclick="document.getElementById('alarm-minute-set').innerHTML = '53'"></td>
+			<td><input type="button" value="54" onclick="document.getElementById('alarm-minute-set').innerHTML = '54'"></td>
+			<td><input type="button" value="55" onclick="document.getElementById('alarm-minute-set').innerHTML = '55'"></td>
+			<td><input type="button" value="56" onclick="document.getElementById('alarm-minute-set').innerHTML = '56'"></td>
+			<td><input type="button" value="57" onclick="document.getElementById('alarm-minute-set').innerHTML = '57'"></td>
+			<td><input type="button" value="58" onclick="document.getElementById('alarm-minute-set').innerHTML = '58'"></td>
+			<td><input type="button" value="59" onclick="document.getElementById('alarm-minute-set').innerHTML = '59'"></td>
+		</tr>
+	</table>	
+</div>
+<div class="button-wrap">
+	<button type="button" id="setAlarm-btn" onclick="executeAlarm()">SET ALARM</button>
+	<button type="button" id="turnoffAlarm-btn" onclick="turnOffAlarm()">TURN OFF ALARM</button>
+</div>
+	
+</div>
+
+</div>
+
+
+<audio src="audio/alarm-clock-audio.mp3" id="phoenix"></audio>
+
+
+<script type="text/javascript">
+
+	
+	// displayDate function
+	function displayDate(){
+		var myDate = new Date();
+		var year = myDate.getFullYear();
+		var month = myDate.getMonth();
+		var date = myDate.getDate();
+		var day = myDate.getDay();
+
+		var monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		var dayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
+
+		month = monthList[month];
+		day = dayList[day];
+		
+		document.getElementById('date-display').innerHTML = day + " | " + date + " | " + month + " | " + year;
+	}
+
+	displayDate();
+
+	
+
+	function displayTime(){
+		var time = new Date();
+		var hours = time.getHours();
+		var minutes = time.getMinutes();
+		var seconds = time.getSeconds();
+		
+		if (hours < 10){
+			hours = "0" + hours;
+		}
+
+		if (minutes < 10){
+			minutes = "0" + minutes;
+		}
+
+		if (seconds < 10){
+			seconds = "0" + seconds;
+		}
+
+		document.getElementById('display').innerHTML = hours + " : " + minutes + " : " + seconds;
+	}
+
+	// displayTime function refresh - every half a second
+	setInterval(displayTime, 500);
+	displayTime();
+
+
+	var alHour;
+	var alMinute;
+	var alarmSound = document.getElementById("phoenix"); 
+
+
+	function setAlarm(){
+		alHour = document.getElementById('alarm-hour-set').innerHTML;
+		alMinute = document.getElementById('alarm-minute-set').innerHTML;
+	}
+
+	// Couldn't figure out how to access existing local variables of current time from displayTime function, so had to declare and define new vairables for the time
+	function executeAlarm(){
+		setAlarm();
+		var time = new Date();
+		var hour = time.getHours();
+		var minute = time.getMinutes();
+		var second = time.getSeconds();
+
+		if(alHour == hour && alMinute == minute){
+			alarmSound.play();
+			alarmSound.loop = true;
+		}
+		else {
+			alarmSound.pause();
+			alarmSound.currentTime = 0;
+		}
+
+		// This isNaN condition doesn't work since the variables contain "nothing" when it checks and it doesn't see that "nothingness" as NaN
+		if(isNaN(alHour) === true  && isNaN(alMinute) === true ){
+			document.getElementById('message-screen').innerHTML = "ALARM IS OFF";
+		}
+		document.getElementById('message-screen').innerHTML = "Alarm is set for " + alHour + " : " + alMinute;
+		
+		
+
+		// console.log(alHour);
+		// console.log(hour);
+		// console.log(alMinute);
+		// console.log(minute);
+	}
+
+	setInterval(executeAlarm, 500);
+
+	function turnOffAlarm(){
+		alHour = document.getElementById('alarm-hour-set').innerHTML = "";
+		alHour = document.getElementById('alarm-minute-set').innerHTML = "";
+		document.getElementById('message-screen').innerHTML = "ALARM IS OFF";
+		alarmSound.pause();
+		alarmSound.currentTime = 0;
+	}
+
+	
+
+
+</script>
+</body>
+</html>
